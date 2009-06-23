@@ -1,0 +1,93 @@
+\ProvidesPackage{beamerthemeWisconsin}
+
+% Adapted from the University of Oregon theme (http://ix.cs.uoregon.edu/~peter/uotheme/)
+% and also from some mangled pieces of the default theme.  That probably puts this under
+% GPLv2.
+
+\usepackage{tabularx}
+
+%% The options for this template
+
+% If this option is present, include the navigation buttons
+% in the lower right corner.
+\newif\ifbeamer@nav
+\beamer@navfalse
+\DeclareOptionBeamer{nav}{\beamer@navtrue}
+
+% Use a more standard black-on-white scheme
+\newif\ifbeamer@white
+\beamer@whitefalse
+\DeclareOptionBeamer{white}{\beamer@whitetrue}
+
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+%% Set up the logos used in the theme
+% This is the logo that goes in the upper right corner.
+\logo{\includegraphics[height=0.6cm]{UW_crest.pdf}}
+% This logo appears below the date on the title page.
+\titlegraphic{\includegraphics[height=3cm]{UW_main.pdf}}
+
+
+\setbeamertemplate{frametitle}[default][center]
+% Removes the logo from the lower right so that we can place it less obtrusively
+\defbeamertemplate*{sidebar right}{uwisconsin theme}
+{ 
+  \vfill%
+  \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+  \vskip2pt%
+}
+
+\useoutertheme{split}
+% Redefine the frameheader to include a logo
+\defbeamertemplate*{frametitle}{uwisconsin theme}[1][left]
+{
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{frametitle}
+    \usebeamerfont{frametitle}%
+    \vbox{}\vskip-1ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \begin{tabularx}{.95\@tempdima}{lXr}
+      \insertframetitle & & \insertlogo
+    \end{tabularx}\par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  \end{beamercolorbox}% 
+}
+
+
+\useinnertheme{circles}
+
+\ifbeamer@white
+  \usecolortheme{WisconsinWhite}
+\else
+  \usecolortheme{Wisconsin}
+\fi
+
+% Circles are much nicer for bullet points, but the circles
+% inner theme does not give you rounded boxes.  Override these
+% settings as in the rounded theme.
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+\setbeamertemplate{blocks}[rounded]
+
+
+% Disable the navigation bar unless it was explicitly requested
+\ifbeamer@nav
+\else
+  \setbeamertemplate{navigation symbols}{}
+\fi
+
+\setbeamerfont{block title}{size={}}
+
+\mode
+<all>
