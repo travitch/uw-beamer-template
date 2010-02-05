@@ -19,6 +19,10 @@
 \beamer@whitefalse
 \DeclareOptionBeamer{white}{\beamer@whitetrue}
 
+\newif\ifbeamer@nologo
+\beamer@nologofalse
+\DeclareOptionBeamer{nologo}{\beamer@nologotrue}
+
 \ProcessOptionsBeamer
 
 \mode<presentation>
@@ -52,7 +56,8 @@
     \vbox{}\vskip-1ex%
     \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
     \begin{tabularx}{.95\@tempdima}{lXr}
-      \insertframetitle & & \insertlogo
+      \ifbeamer@nologo\insertframetitle&&\else\insertframetitle&&\insertlogo
+      \fi
     \end{tabularx}\par%
     {%
       \ifx\insertframesubtitle\@empty%
