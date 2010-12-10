@@ -23,6 +23,14 @@
 \beamer@nologofalse
 \DeclareOptionBeamer{nologo}{\beamer@nologotrue}
 
+\newif\ifbeamer@sections
+\beamer@sectionsfalse
+\DeclareOptionBeamer{sections}{\beamer@sectionstrue}
+
+\newif\ifbeamer@noslidenumbers
+\beamer@noslidenumbersfalse
+\DeclareOptionBeamer{noslidenumbers}{\beamer@noslidenumberstrue}
+
 \ProcessOptionsBeamer
 
 \mode<presentation>
@@ -37,13 +45,25 @@
 \setbeamertemplate{frametitle}[default][center]
 % Removes the logo from the lower right so that we can place it less obtrusively
 \defbeamertemplate*{sidebar right}{uwisconsin theme}
-{ 
+{
   \vfill%
   \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
   \vskip2pt%
 }
 
-\useoutertheme{split}
+\newcommand{\frameTitleAndSection}[0]{
+  \ifbeamer@sections
+    \parbox{3in}{\insertframetitle \\ \tiny\usebeamercolor[fg]{section text}\insertsectionhead}
+  \else
+    \insertframetitle
+  \fi
+}
+
+\ifbeamer@noslidenumbers
+\else
+\useoutertheme{subtle}
+\fi
+
 % Redefine the frameheader to include a logo
 \defbeamertemplate*{frametitle}{uwisconsin theme}[1][left]
 {
@@ -56,7 +76,10 @@
     \vbox{}\vskip-1ex%
     \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
     \begin{tabularx}{.95\@tempdima}{lXr}
-      \ifbeamer@nologo\insertframetitle&&\else\insertframetitle&&\insertlogo
+      \ifbeamer@nologo
+        \frameTitleAndSection & &
+      \else
+        \frameTitleAndSection & & \insertlogo
       \fi
     \end{tabularx}\par%
     {%
@@ -67,7 +90,7 @@
     }%
     \vskip-1ex%
     \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
-  \end{beamercolorbox}% 
+  \end{beamercolorbox}%
 }
 
 
