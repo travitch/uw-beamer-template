@@ -8,25 +8,32 @@
 
 %% The options for this template
 
-% If this option is present, include the navigation buttons
-% in the lower right corner.
+% If this option [nav] is present, include the navigation buttons in
+% the lower right corner.  The default is no navigation buttons
 \newif\ifbeamer@nav
 \beamer@navfalse
 \DeclareOptionBeamer{nav}{\beamer@navtrue}
 
-% Use a more standard black-on-white scheme
+% Use a more standard black-on-white scheme.  The option [white] is
+% not enabled by default.
 \newif\ifbeamer@white
 \beamer@whitefalse
 \DeclareOptionBeamer{white}{\beamer@whitetrue}
 
+% If the option [nologo] is provided, the UW logo on the right side of
+% the slide title is suppressed.  The logo is on by default.
 \newif\ifbeamer@nologo
 \beamer@nologofalse
 \DeclareOptionBeamer{nologo}{\beamer@nologotrue}
 
+% The option [sections] shows the current section name under the slide
+% title.  There are no sections shown by default.
 \newif\ifbeamer@sections
 \beamer@sectionsfalse
 \DeclareOptionBeamer{sections}{\beamer@sectionstrue}
 
+% The option [noslidenumbers] suppresses the display of slide numbers.
+% Slide numbers are shown by default
 \newif\ifbeamer@noslidenumbers
 \beamer@noslidenumbersfalse
 \DeclareOptionBeamer{noslidenumbers}{\beamer@noslidenumberstrue}
