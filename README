@@ -18,10 +18,12 @@ the following:
 
 
 The theme currently has two options:
-  * nav   - This option includes a navigation bar in the
-            lower-right corner of each slide
-  * white - This option changes the color scheme to black-on-white
-            for projectors with poor color balance
+  * nav          - This option includes a navigation bar in the
+                   lower-right corner of each slide
+  * white        - This option changes the color scheme to black-on-white
+                   for projectors with poor color balance
+  * nologo       - Suppress the crest in frame titles
+  * compactlogo  - Compact title logo (takes less vertical space)
 
 Options are specified as:
   \usetheme[white]{Wisconsin}
