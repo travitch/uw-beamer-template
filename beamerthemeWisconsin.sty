@@ -26,6 +26,13 @@
 \beamer@nologofalse
 \DeclareOptionBeamer{nologo}{\beamer@nologotrue}
 
+% The default logo has the crest above the university name, which uses
+% a lot of vertical room.  For a more 'compact' look, use the
+% [compactlogo] option.
+\newif\ifbeamer@compactlogo
+\beamer@compactlogofalse
+\DeclareOptionBeamer{compactlogo}{\beamer@compactlogotrue}
+
 % The option [sections] shows the current section name under the slide
 % title.  There are no sections shown by default.
 \newif\ifbeamer@sections
@@ -43,11 +50,22 @@
 \mode<presentation>
 
 %% Set up the logos used in the theme
-% This is the logo that goes in the upper right corner.
+% This is the logo that goes in the upper right corner, in the frametitle.
 \logo{\includegraphics[height=0.6cm]{UW_crest.pdf}}
 % This logo appears below the date on the title page.
-\titlegraphic{\includegraphics[height=3cm]{UW_main.pdf}}
-
+\ifbeamer@compactlogo
+  \ifbeamer@white
+    \titlegraphic{\includegraphics[height=1.5cm]{UW_main_compact_white.pdf}}
+  \else
+    \titlegraphic{\includegraphics[height=1.5cm]{UW_main_compact.pdf}}
+  \fi
+\else
+  \ifbeamer@white
+    \titlegraphic{\includegraphics[height=3cm]{UW_main_white.pdf}}
+  \else
+    \titlegraphic{\includegraphics[height=3cm]{UW_main.pdf}}
+  \fi
+\fi
 
 \setbeamertemplate{frametitle}[default][center]
 % Removes the logo from the lower right so that we can place it less obtrusively
